@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>大宮東中学校 創立80周年記念 スカイランタンフェスティバル</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    /* 宵の口をイメージした幻想的なグラデーション背景 */
+    body {
+      background: linear-gradient(to bottom, #060c21 0%, #111d42 40%, #c84b02 85%, #f39c12 100%);
+      color: #f8fafc;
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* 星を瞬かせるアニメーション */
+    .star-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ランタンコンテナ */
+    #lantern-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* ふわふわ上昇するランタンの共通ベーススタイル */
+    .lantern {
+      position: absolute;
+      border-radius: 8px;
+      bottom: -120px;
+      transform-origin: center bottom;
+      animation: floatUp linear infinite;
+    }
+
+    /* ランタンの内燃光演出（共通ベース） */
+    .lantern::after {
+      content: '';
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30%;
+      height: 30%;
+      border-radius: 50%;
+      filter: blur(2px);
+    }
+
+    /* --- ランタンカラーバリエーション (黄色・緑色・青色) --- */
+    
+    /* 1. 黄色ランタン (3年生カラー) */
+    .lantern-yellow {
+      background: linear-gradient(135deg, rgba(254, 240, 138, 0.95) 0%, rgba(234, 179, 8, 0.9) 100%);
+      box-shadow: 0 0 20px rgba(234, 179, 8, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.6);
+    }
+    .lantern-yellow::after {
+      background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(253,224,71,0.8) 50%, rgba(0,0,0,0) 100%);
+    }
+
+    /* 2. 緑色ランタン (1年生カラー) */
+    .lantern-green {
+      background: linear-gradient(135deg, rgba(187, 247, 208, 0.95) 0%, rgba(34, 197, 94, 0.9) 100%);
+      box-shadow: 0 0 20px rgba(34, 197, 94, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.6);
+    }
+    .lantern-green::after {
+      background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(134,239,172,0.8) 50%, rgba(0,0,0,0) 100%);
+    }
+
+    /* 3. 青色ランタン (2年生カラー) */
+    .lantern-blue {
+      background: linear-gradient(135deg, rgba(191, 219, 254, 0.95) 0%, rgba(59, 130, 246, 0.9) 100%);
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.6);
+    }
+    .lantern-blue::after {
+      background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(147,197,253,0.8) 50%, rgba(0,0,0,0) 100%);
+    }
+
+    /* 上昇アニメーション */
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.9;
+      }
+      90% {
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(-115vh) translateX(var(--drift)) rotate(var(--rotation));
+        opacity: 0;
+      }
+    }
+
+    /* グラスモーフィズム（すりガラス効果） */
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .glass-panel-alert {
+      background: rgba(220, 38, 38, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* 5回だけ上下に弾むバウンスアニメーション設定 */
+    .bounce-5times {
+      animation: customBounce 1.2s ease-in-out;
+      animation-iteration-count: 5;
+    }
+
+    @keyframes customBounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* 文字盤のネオン風グロー効果 */
+    .glow-text {
+      text-shadow: 0 0 10px rgba(253, 186, 116, 0.6), 0 0 20px rgba(249, 115, 22, 0.4);
+    }
+
+    .glow-btn {
+      box-shadow: 0 0 15px rgba(249, 115, 22, 0.5);
+      transition: all 0.3s ease;
+    }
+    .glow-btn:hover {
+      box-shadow: 0 0 25px rgba(249, 115, 22, 0.8);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="relative min-h-screen pb-20">
+
+  <!-- 背景演出レイヤー -->
+  <div class="star-bg" id="star-bg"></div>
+  <div id="lantern-container"></div>
+
+  <!-- コンテンツ全体のラッパー（スマホ幅に最適化、デスクトップでは中央寄せ） -->
+  <div class="relative z-10 max-w-lg mx-auto px-4 pt-4 flex flex-col gap-6">
+
+    <!-- 1. 【最上部】緊急告知・リアルタイム案内エリア -->
+    <div id="status-area" class="transition-all duration-500 ease-in-out">
+      <!-- 通常時のメッセージ -->
+      <div id="status-normal" class="glass-panel text-orange-200 text-xs py-2.5 px-4 rounded-full flex items-center justify-center gap-2 border border-orange-500/20">
+        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+        <span>現在、予定通り開催に向けて準備を進めております。</span>
+      </div>
+      <!-- 天候不良等による順延・変更時のメッセージ（初期状態は非表示、適用時に5回バウンドする） -->
+      <div id="status-alert" class="hidden glass-panel-alert text-white text-sm py-3.5 px-4 rounded-xl flex flex-col gap-1 shadow-lg bounce-5times">
+        <div class="flex items-center gap-2 font-bold">
+          <svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+          <span>【重要】天候不良にともなう順延のお知らせ</span>
+        </div>
+        <p class="text-xs text-red-50 leading-relaxed pl-7">
+          本日8/29(土)の開催は、雨天・強風が予想されるため、<strong class="font-bold underline text-yellow-300">明日8月30日（日）に順延</strong>となりました。タイムスケジュール等の時間変更はございませんが、<strong class="font-bold text-yellow-200">順延に伴いキッチンカーの出店は中止</strong>となります（地元の卒業生・有志による出店や屋台は予定通り営業いたします）。お気をつけてお越しください。
+        </p>
+      </div>
+    </div>
+
+    <!-- 2. 【メイン】ヘッダー＆イベントスローガン -->
+    <header class="text-center py-6 flex flex-col items-center gap-2">
+      <div class="inline-block bg-orange-500/20 text-orange-300 text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full border border-orange-500/30 mb-2">
+        創立80周年記念イベント
+      </div>
+      <h1 class="text-2xl font-black tracking-tight leading-snug">
+        さいたま市立大宮東中学校<br>
+        <span class="text-3xl text-orange-400 glow-text font-serif">スカイランタン<br>フェスティバル</span>
+      </h1>
+      <p class="text-sm text-slate-300 mt-2 italic font-light">
+        〜 想いをのせて、夜空へ。80年の歴史を, 光でつなぐ 〜
+      </p>
+    </header>
+
+    <!-- 3. 【カウントダウン】本番（リリース）までの時間 -->
+    <section class="glass-panel rounded-2xl p-5 text-center shadow-xl border-orange-500/10">
+      <h2 class="text-xs font-bold text-orange-300 tracking-wider mb-3 uppercase">ランタン一斉リリースまで</h2>
+      <div class="grid grid-cols-4 gap-2 text-white">
+        <div class="bg-slate-950/70 p-2.5 rounded-xl border border-slate-800">
+          <div id="timer-days" class="text-2xl font-black font-mono text-orange-400">00</div>
+          <div class="text-[10px] text-slate-400 mt-1">日</div>
+        </div>
+        <div class="bg-slate-950/70 p-2.5 rounded-xl border border-slate-800">
+          <div id="timer-hours" class="text-2xl font-black font-mono text-orange-400">00</div>
+          <div class="text-[10px] text-slate-400 mt-1">時間</div>
+        </div>
+        <div class="bg-slate-950/70 p-2.5 rounded-xl border border-slate-800">
+          <div id="timer-mins" class="text-2xl font-black font-mono text-orange-400">00</div>
+          <div class="text-[10px] text-slate-400 mt-1">分</div>
+        </div>
+        <div class="bg-slate-950/70 p-2.5 rounded-xl border border-slate-800">
+          <div id="timer-secs" class="text-2xl font-black font-mono text-orange-400">00</div>
+          <div class="text-[10px] text-slate-400 mt-1">秒</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 【開催概要】カード -->
+    <section class="glass-panel rounded-2xl p-5 shadow-lg flex flex-col gap-4">
+      <div class="flex items-start gap-3">
+        <div class="bg-orange-500/20 p-2.5 rounded-lg text-orange-400 shrink-0">
+          <!-- Calendar Icon -->
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        </div>
+        <div>
+          <h3 class="text-xs text-slate-400 font-bold">開催日時</h3>
+          <p id="info-date" class="text-base font-bold mt-0.5 text-white">2026年 8月29日（土）</p>
+          <p class="text-sm text-slate-300">17:30 〜 20:00（15:00開場）</p>
+          <span class="inline-block bg-orange-950/50 text-orange-300 text-[10px] px-2 py-0.5 rounded border border-orange-500/20 mt-1">荒天時は翌 30日(日)に順延</span>
+        </div>
+      </div>
+
+      <hr class="border-slate-800">
+
+      <div class="flex items-start gap-3">
+        <div class="bg-orange-500/20 p-2.5 rounded-lg text-orange-400 shrink-0">
+          <!-- Map Marker Icon -->
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <div>
+          <h3 class="text-xs text-slate-400 font-bold">会場</h3>
+          <p class="text-base font-bold mt-0.5 text-white">さいたま市立大宮東中学校 校庭</p>
+          <p class="text-xs text-slate-400 mt-1">※駐輪場は給食室裏（西門からお入りください）</p>
+        </div>
+      </div>
+
+      <hr class="border-slate-800">
+
+      <div class="flex items-start gap-3">
+        <div class="bg-orange-500/20 p-2.5 rounded-lg text-orange-400 shrink-0">
+          <!-- Ticket Icon -->
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"/></svg>
+        </div>
+        <div>
+          <h3 class="text-xs text-slate-400 font-bold">入場料・ランタン協賛</h3>
+          <p class="text-base font-bold mt-0.5 text-white">入場・観覧自由（無料）</p>
+          <p class="text-xs text-slate-400 mt-1">当日販売ランタン：限定100基 @5,000円（16:00受付開始）</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. 【タイムスケジュール】 -->
+    <section class="glass-panel rounded-2xl p-5 shadow-lg">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="w-1.5 h-4 bg-orange-500 rounded"></span>
+        <h2 class="text-base font-bold text-white">タイムスケジュール</h2>
+      </div>
+
+      <!-- 縦型タイムライン -->
+      <div class="relative border-l-2 border-orange-500/30 ml-3 pl-5 flex flex-col gap-6">
+        
+        <!-- 15:00 -->
+        <div class="relative">
+          <span class="absolute -left-[27px] top-1 w-3 h-3 rounded-full bg-orange-500 ring-4 ring-slate-900"></span>
+          <span class="text-xs font-bold text-orange-400">15:00 〜</span>
+          <h4 id="sched-1500-title" class="text-sm font-bold text-white transition-colors duration-300">キッチンカー・出店 営業スタート</h4>
+          <p id="sched-1500-desc" class="text-xs text-slate-400 mt-0.5 transition-colors duration-300">昇降口前駐車場にて、地域のキッチンカーや卒業生(OB)の屋台が並びます！</p>
+          <!-- 順延時のみ表示される警告 -->
+          <p id="sched-1500-postponed-note" class="hidden text-[11px] text-red-300 font-semibold mt-1 bg-red-950/40 p-2 rounded-lg border border-red-500/20">
+            ※順延に伴いキッチンカーの営業は中止となりました。地元の卒業生(OB)有志の屋台は予定通り営業いたします。
+          </p>
+        </div>
+
+        <!-- 16:00 -->
+        <div class="relative">
+          <span class="absolute -left-[27px] top-1 w-3 h-3 rounded-full bg-orange-400 ring-4 ring-slate-900"></span>
+          <span class="text-xs font-bold text-orange-400">16:00 〜</span>
+          <h4 class="text-sm font-bold text-white">一般当日参加 受付開始</h4>
+          <p class="text-xs text-slate-400 mt-0.5">当日販売ランタン（100基限定）の受付・絵付けがスタートします。</p>
+        </div>
+
+        <!-- 17:00 -->
+        <div class="relative">
+          <span class="absolute -left-[27px] top-1 w-3 h-3 rounded-full bg-orange-400 ring-4 ring-slate-900"></span>
+          <span class="text-xs font-bold text-orange-400">17:00 〜 17:40</span>
+          <h4 class="text-sm font-bold text-white">アトラクション・パフォーマンス（体育館）</h4>
+          <p class="text-xs text-orange-300 mt-1 font-bold">★ 随時情報更新！</p>
+          <p class="text-xs text-slate-400">在校生有志によるアトラクションや、OBによる特別ステージを予定しています。出演ラインナップは決定次第こちらで発表します！</p>
+        </div>
+
+        <!-- 18:40 -->
+        <div class="relative">
+          <span class="absolute -left-[27px] top-1 w-3 h-3 rounded-full bg-orange-500 ring-4 ring-slate-900"></span>
+          <span class="text-xs font-bold text-orange-400">18:40 〜</span>
+          <h4 class="text-sm font-bold text-white">セレモニー ＆ 点灯カウントダウン（校庭）</h4>
+          <p class="text-xs text-slate-400 mt-0.5">来賓挨拶、全員のランタンが一斉に温かな光を灯す感動の瞬間です。</p>
+        </div>
+
+        <!-- 19:00 -->
+        <div class="relative">
+          <span class="absolute -left-[27px] top-1 w-3.5 h-3.5 rounded-full bg-yellow-400 ring-4 ring-orange-500/30 animate-pulse"></span>
+          <span class="text-xs font-bold text-yellow-300 glow-text">19:00 〜（Climax）</span>
+          <h4 class="text-sm font-bold text-yellow-200 glow-text">スカイランタン 一斉リリース</h4>
+          <p class="text-xs text-slate-300 mt-0.5 font-semibold">校庭いっぱいに、願いをのせた光の群れが美しく舞い上がります。</p>
+        </div>
+
+        <!-- 20:00 -->
+        <div class="relative">
+          <span class="absolute -left-[27px] top-1 w-3 h-3 rounded-full bg-slate-600 ring-4 ring-slate-900"></span>
+          <span class="text-xs font-bold text-slate-400">20:00</span>
+          <h4 class="text-sm font-bold text-slate-400">イベント終了・後片付け</h4>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. 【キッチンカー・出店案内】 -->
+    <section class="glass-panel rounded-2xl p-5 shadow-lg flex flex-col gap-3">
+      <div class="flex items-center gap-2">
+        <span class="w-1.5 h-4 bg-orange-500 rounded"></span>
+        <h2 class="text-base font-bold text-white">出店・フードエリア情報</h2>
+      </div>
+      <p id="food-main-desc" class="text-xs text-slate-300 leading-relaxed transition-all duration-300">
+        現在、東中の卒業生（OB）の皆様、地域ゆかりのキッチンカーの出店交渉を進めております。やきそば、からあげ、各種ドリンクなど、お祭り気分を楽しめるメニューが盛りだくさん！
+      </p>
+
+      <!-- 順延・変更に伴うキッチンカー・出店ルール（常に注記として表示し、順延モードでより強調） -->
+      <div id="food-postponed-warning" class="p-3 bg-slate-900/60 border border-slate-800 rounded-xl text-xs text-slate-300 leading-normal transition-all duration-300">
+        <span class="font-bold text-orange-400">⚠️ 順延時の出店に関する重要なお知らせ：</span><br>
+        天候不良等によりイベントが<strong class="text-orange-300">日曜日に順延となった場合、キッチンカーの営業は中止</strong>となります。ただし、<strong class="text-green-300">地元の卒業生（OB）有志による出店・屋台は予定通り営業</strong>いたします。
+      </div>
+      
+      <!-- 準備中プレースホルダー -->
+      <div class="bg-slate-950/60 rounded-xl p-4 text-center border border-slate-800">
+        <svg class="w-8 h-8 text-orange-400/50 mx-auto mb-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+        <p class="text-xs text-orange-300 font-bold">出店ラインナップは7月中旬公開予定！</p>
+        <p class="text-[10px] text-slate-400 mt-0.5">どんな美味しいお店が来るか、どうぞお楽しみに！</p>
+      </div>
+    </section>
+
+    <!-- 7. 【安全への配慮】 -->
+    <section class="glass-panel rounded-2xl p-5 shadow-lg border-emerald-500/10">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="w-1.5 h-4 bg-emerald-500 rounded"></span>
+        <h2 class="text-base font-bold text-white">安心・安全への取り組み</h2>
+      </div>
+      <p class="text-xs text-slate-300 leading-relaxed mb-4">
+        大宮東中学校での開催にあたり、近隣の皆さまや消防、環境への影響に最大限の配慮を行っています。
+      </p>
+
+      <div class="grid grid-cols-1 gap-3 text-xs">
+        <div class="bg-slate-900/50 p-3 rounded-xl border border-slate-800 flex items-start gap-3">
+          <div class="bg-emerald-500/20 text-emerald-400 p-1.5 rounded-lg shrink-0">
+            <!-- Leaf/Eco icon -->
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+          </div>
+          <div>
+            <h4 class="font-bold text-emerald-300">火を使わない「LEDランタン」</h4>
+            <p class="text-slate-400 text-[11px] mt-0.5">火気・燃料は一切不使用。高輝度LEDバルーンですので、火災の心配が一切ありません。</p>
+          </div>
+        </div>
+
+        <div class="bg-slate-900/50 p-3 rounded-xl border border-slate-800 flex items-start gap-3">
+          <div class="bg-emerald-500/20 text-emerald-400 p-1.5 rounded-lg shrink-0">
+            <!-- Shield/Link icon -->
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          </div>
+          <div>
+            <h4 class="font-bold text-emerald-300">100%完全回収ルール（環境配慮）</h4>
+            <p class="text-slate-400 text-[11px] mt-0.5">ランタンはすべて手元の「糸」と「重り（ペーパーウエイト）」に繋がれており、リリース後も完全回収します。ゴミを地域に散らしません。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. 【ご来場にあたってのお願い】 -->
+    <section class="glass-panel rounded-2xl p-5 shadow-lg text-xs leading-relaxed flex flex-col gap-2 text-slate-300">
+      <div class="flex items-center gap-2 mb-1">
+        <span class="w-1.5 h-4 bg-amber-500 rounded"></span>
+        <h2 class="text-base font-bold text-white">来場時のお願い</h2>
+      </div>
+      <ul class="list-disc list-inside flex flex-col gap-1.5">
+        <li>校内への車・バイクの乗り入れは原則お断りしております。</li>
+        <li>自転車でお越しの場合は「西門」からお入りいただき、「給食室裏」の特設駐輪場をご利用ください。</li>
+        <li>校庭に座ってゆっくり鑑賞いただくため、レジャーシートのご持参をおすすめします。</li>
+        <li>夏の宵の口はまだ気温が高い場合があります。各自熱中症対策（水筒・帽子など）をお願いします。</li>
+      </ul>
+    </section>
+
+    <!-- フッター -->
+    <footer class="text-center py-8 text-[11px] text-slate-500 flex flex-col gap-1">
+      <p>主催：さいたま市立大宮東中学校 創立80周年記念事業実行委員会</p>
+      <p>&copy; 2026 Omiya Higashi Junior High School 80th Anniversary Committee.</p>
+    </footer>
+
+  </div>
+
+  <!-- 【シミュレーション用スイッチ】一般非表示・URLパラメータ（?test=true）で出現 -->
+  <div id="debug-switch-container" class="hidden fixed bottom-4 right-4 z-50 glass-panel p-2 rounded-xl shadow-2xl flex flex-col gap-1.5 text-[10px] text-slate-400 max-w-[150px] border border-orange-500/30">
+    <div class="font-bold text-orange-400 border-b border-slate-800 pb-1 text-center">委員会 告知テスト用</div>
+    <p class="text-[9px] leading-tight text-center">当日の「天候不良・順延判断」を想定した告知切替テストです：</p>
+    <button id="btn-toggle-status" class="w-full bg-orange-600 hover:bg-orange-500 text-white font-bold py-1 px-2 rounded-lg transition-colors duration-200">
+      順延バナー切替
+    </button>
+  </div>
+
+  <script>
+    // ----------------------------------------------------
+    // 0. URLパラメータをチェックしてテスト用スイッチを表示する
+    // ----------------------------------------------------
+    function checkDebugMode() {
+      const urlParams = new URLSearchParams(window.location.search);
+      // ?test=true または ?debug=true の場合にテストスイッチを出現させる
+      if (urlParams.has('test') || urlParams.has('debug')) {
+        const switchBox = document.getElementById('debug-switch-container');
+        if (switchBox) {
+          switchBox.classList.remove('hidden');
+        }
+      }
+    }
+    checkDebugMode();
+
+    // ----------------------------------------------------
+    // 1. カウントダウンタイマー処理
+    // ----------------------------------------------------
+    function updateCountdown() {
+      // ターゲット日付：2026年8月29日 17:30 JST (イベント開始)
+      const targetDate = new Date('2026-08-29T17:30:00+09:00');
+      const now = new Date();
+      const difference = targetDate - now;
+
+      if (difference <= 0) {
+        // カウントダウン終了時
+        document.getElementById('timer-days').innerText = "00";
+        document.getElementById('timer-hours').innerText = "00";
+        document.getElementById('timer-mins').innerText = "00";
+        document.getElementById('timer-secs').innerText = "00";
+        return;
+      }
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((difference % (1000 * 60)) / 1000);
+
+      document.getElementById('timer-days').innerText = String(days).padStart(2, '0');
+      document.getElementById('timer-hours').innerText = String(hours).padStart(2, '0');
+      document.getElementById('timer-mins').innerText = String(mins).padStart(2, '0');
+      document.getElementById('timer-secs').innerText = String(secs).padStart(2, '0');
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown(); // 初回起動
+
+    // ----------------------------------------------------
+    // 2. 瞬く星空演出 (CSS Stars generator)
+    // ----------------------------------------------------
+    function createStars() {
+      const starBg = document.getElementById('star-bg');
+      if (!starBg) return;
+      const starCount = 50; // スマホでの処理負荷を考慮した数
+      for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.style.position = 'absolute';
+        star.style.width = Math.random() * 2.5 + 'px';
+        star.style.height = star.style.width;
+        star.style.backgroundColor = '#ffffff';
+        star.style.borderRadius = '50%';
+        star.style.top = Math.random() * 90 + '%';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.opacity = Math.random();
+        
+        // 星が瞬く動き
+        star.style.transition = 'opacity ' + (Math.random() * 3 + 1) + 's ease-in-out';
+        starBg.appendChild(star);
+
+        setInterval(() => {
+          star.style.opacity = Math.random() * 0.8 + 0.2;
+        }, Math.random() * 4000 + 2000);
+      }
+    }
+    createStars();
+
+    // ----------------------------------------------------
+    // 3. ふわふわ昇るスカイランタン自動生成 (黄色、緑色、青色の3色)
+    // ----------------------------------------------------
+    function spawnLantern() {
+      const container = document.getElementById('lantern-container');
+      if (!container) return;
+
+      const lantern = document.createElement('div');
+      lantern.classList.add('lantern');
+
+      // ランダムでクラスに色を割り当て (yellow, green, blue)
+      const colors = ['lantern-yellow', 'lantern-green', 'lantern-blue'];
+      const randomColorClass = colors[Math.floor(Math.random() * colors.length)];
+      lantern.classList.add(randomColorClass);
+
+      // ランタンの形状比率は直方体風 (縦横比 1.4:1)
+      const width = Math.random() * 18 + 12; // 12px〜30px (邪魔にならない絶妙なサイズ)
+      const height = width * 1.4;
+      lantern.style.width = width + 'px';
+      lantern.style.height = height + 'px';
+
+      // 開始位置（横方向のランダム分布）
+      lantern.style.left = (Math.random() * 100) + '%';
+
+      // アニメーション設定
+      const duration = Math.random() * 12 + 15; // 15秒〜27秒かけてゆっくり上昇
+      lantern.style.animationDuration = duration + 's';
+
+      // CSS変数を使用して独自の揺らぎを渡す
+      const drift = (Math.random() * 100 - 50) + 'px'; // 左右への揺らぎ
+      const rotation = (Math.random() * 20 - 10) + 'deg'; // 傾き
+      lantern.style.setProperty('--drift', drift);
+      lantern.style.setProperty('--rotation', rotation);
+
+      container.appendChild(lantern);
+
+      // 上昇し終えたランタンを削除してメモリ節約
+      setTimeout(() => {
+        lantern.remove();
+      }, duration * 1000);
+    }
+
+    // 初回にいくつか散りばめてからスタート
+    for (let i = 0; i < 6; i++) {
+      spawnLantern();
+    }
+    // 4秒に1回新しいランタンを出現させる
+    setInterval(spawnLantern, 4000);
+
+    // ----------------------------------------------------
+    // 4. 緊急告知・順延テストスイッチ処理 (5回アニメーションをリセットして再生)
+    // ----------------------------------------------------
+    const btnToggle = document.getElementById('btn-toggle-status');
+    const statusNormal = document.getElementById('status-normal');
+    const statusAlert = document.getElementById('status-alert');
+    
+    // 連動して変更する項目
+    const sched1500Title = document.getElementById('sched-1500-title');
+    const sched1500Desc = document.getElementById('sched-1500-desc');
+    const sched1500PostponedNote = document.getElementById('sched-1500-postponed-note');
+    const foodPostponedWarning = document.getElementById('food-postponed-warning');
+    const infoDate = document.getElementById('info-date');
+
+    if (btnToggle) {
+      btnToggle.addEventListener('click', () => {
+        if (statusAlert.classList.contains('hidden')) {
+          // --- 【順延案内モード】へ切り替え ---
+          statusNormal.classList.add('hidden');
+          statusAlert.classList.remove('hidden');
+
+          // バウンスアニメーションのリセット再生
+          statusAlert.classList.remove('bounce-5times');
+          void statusAlert.offsetWidth; // リフロー
+          statusAlert.classList.add('bounce-5times');
+
+          // タイムスケジュール（15:00）を順延モードに書き換え
+          sched1500Title.innerText = "地元有志の出店（屋台） 営業スタート";
+          sched1500Desc.innerText = "昇降口前駐車場にて、本校卒業生(OB)や地元有志の温かい屋台が並びます。";
+          sched1500PostponedNote.classList.remove('hidden');
+
+          // フードエリア注意書きのビジュアル強化（目立つ警告枠に変更）
+          foodPostponedWarning.classList.remove('bg-slate-900/60', 'border-slate-800', 'text-slate-300');
+          foodPostponedWarning.classList.add('bg-red-950/75', 'border-red-500/50', 'text-red-200', 'ring-2', 'ring-red-500/20');
+
+          // 開催概要のメイン日付表記を翌日に更新
+          infoDate.innerHTML = '2026年 8月30日（日） <span class="text-xs bg-red-600 text-white px-2 py-0.5 rounded ml-2 font-normal animate-pulse">順延開催</span>';
+
+          btnToggle.innerText = "通常表示へ戻す";
+          btnToggle.classList.remove('bg-orange-600');
+          btnToggle.classList.add('bg-green-600');
+        } else {
+          // --- 【通常モード】へ戻す ---
+          statusNormal.classList.remove('hidden');
+          statusAlert.classList.add('hidden');
+
+          // タイムスケジュール（15:00）を元に戻す
+          sched1500Title.innerText = "キッチンカー・出店 営業スタート";
+          sched1500Desc.innerText = "昇降口前駐車場にて、地域のキッチンカーや卒業生(OB)の屋台が並びます！";
+          sched1500PostponedNote.classList.add('hidden');
+
+          // フードエリア注意書きの通常ビジュアルへ戻す
+          foodPostponedWarning.classList.remove('bg-red-950/75', 'border-red-500/50', 'text-red-200', 'ring-2', 'ring-red-500/20');
+          foodPostponedWarning.classList.add('bg-slate-900/60', 'border-slate-800', 'text-slate-300');
+
+          // 開催概要の日付表記を元に戻す
+          infoDate.innerHTML = '2026年 8月29日（土）';
+
+          btnToggle.innerText = "順延バナー切替";
+          btnToggle.classList.remove('bg-green-600');
+          btnToggle.classList.add('bg-orange-600');
+        }
+      });
+    }
+
+  </script>
+</body>
+</html>
