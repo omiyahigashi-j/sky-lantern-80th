@@ -408,7 +408,7 @@
 
   </div>
 
-  <!-- 【シミュレーション用スイッチ】一般非表示・URLパラメータ（?test=true）で出現 -->
+  <!-- 【シミュレーション用スイッチ】画面右下に配置（チラシ看板の打ち合わせや動作チェック用） -->
   <div id="debug-switch-container" class="hidden fixed bottom-4 right-4 z-50 glass-panel p-2 rounded-xl shadow-2xl flex flex-col gap-1.5 text-[10px] text-slate-400 max-w-[150px] border border-orange-500/30">
     <div class="font-bold text-orange-400 border-b border-slate-800 pb-1 text-center">委員会 告知テスト用</div>
     <p class="text-[9px] leading-tight text-center">当日の「天候不良・順延判断」を想定した告知切替テストです：</p>
@@ -418,6 +418,11 @@
   </div>
 
   <script>
+    // ----------------------------------------------------
+    // ★ 順延決定時の本番切り替えスイッチ（ここを true に書き換えるだけで一発順延公開可能）
+    // ----------------------------------------------------
+    const FORCE_POSTPONED = false; // ★ 実際に順延させる場合はここを true に書き換えてください
+
     // ----------------------------------------------------
     // 0. URLパラメータをチェックしてテスト用スイッチを表示する
     // ----------------------------------------------------
@@ -431,14 +436,13 @@
         }
       }
     }
-    checkDebugMode();
 
     // ----------------------------------------------------
     // 1. カウントダウンタイマー処理
     // ----------------------------------------------------
     function updateCountdown() {
-      // ターゲット日付：2026年8月29日 17:30 JST (イベント開始)
-      const targetDate = new Date('2026-08-29T17:30:00+09:00');
+      // ターゲット日付：2026年8月29日 19:00 JST (イベント開始)
+      const targetDate = new Date('2026-08-29T19:00:00+09:00');
       const now = new Date();
       const difference = targetDate - now;
 
@@ -492,7 +496,6 @@
         }, Math.random() * 4000 + 2000);
       }
     }
-    createStars();
 
     // ----------------------------------------------------
     // 3. ふわふわ昇るスカイランタン自動生成 (黄色、緑色、青色の3色)
@@ -504,13 +507,13 @@
       const lantern = document.createElement('div');
       lantern.classList.add('lantern');
 
-      // ランダムでクラスに色を割り当て (yellow, green, blue)
+      // 各学年カラーをランダムで割り当て
       const colors = ['lantern-yellow', 'lantern-green', 'lantern-blue'];
       const randomColorClass = colors[Math.floor(Math.random() * colors.length)];
       lantern.classList.add(randomColorClass);
 
       // ランタンの形状比率は直方体風 (縦横比 1.4:1)
-      const width = Math.random() * 18 + 12; // 12px〜30px (邪魔にならない絶妙なサイズ)
+      const width = Math.random() * 18 + 12; // 12px〜30px
       const height = width * 1.4;
       lantern.style.width = width + 'px';
       lantern.style.height = height + 'px';
@@ -519,92 +522,114 @@
       lantern.style.left = (Math.random() * 100) + '%';
 
       // アニメーション設定
-      const duration = Math.random() * 12 + 15; // 15秒〜27秒かけてゆっくり上昇
+      const duration = Math.random() * 12 + 15; // 15秒〜27秒かけて上昇
       lantern.style.animationDuration = duration + 's';
 
-      // CSS変数を使用して独自の揺らぎを渡す
-      const drift = (Math.random() * 100 - 50) + 'px'; // 左右への揺らぎ
-      const rotation = (Math.random() * 20 - 10) + 'deg'; // 傾き
+      // 独自の揺らぎをCSS変数へ
+      const drift = (Math.random() * 100 - 50) + 'px';
+      const rotation = (Math.random() * 20 - 10) + 'deg';
       lantern.style.setProperty('--drift', drift);
       lantern.style.setProperty('--rotation', rotation);
 
       container.appendChild(lantern);
 
-      // 上昇し終えたランタンを削除してメモリ節約
+      // 上昇後のクリーンアップ
       setTimeout(() => {
         lantern.remove();
       }, duration * 1000);
     }
 
-    // 初回にいくつか散りばめてからスタート
-    for (let i = 0; i < 6; i++) {
-      spawnLantern();
-    }
-    // 4秒に1回新しいランタンを出現させる
-    setInterval(spawnLantern, 4000);
-
     // ----------------------------------------------------
-    // 4. 緊急告知・順延テストスイッチ処理 (5回アニメーションをリセットして再生)
+    // 4. 告知状態の切り替え関数 (デバッグ切替と本番強制の両方で利用)
     // ----------------------------------------------------
     const btnToggle = document.getElementById('btn-toggle-status');
     const statusNormal = document.getElementById('status-normal');
     const statusAlert = document.getElementById('status-alert');
-    
-    // 連動して変更する項目
     const sched1500Title = document.getElementById('sched-1500-title');
     const sched1500Desc = document.getElementById('sched-1500-desc');
     const sched1500PostponedNote = document.getElementById('sched-1500-postponed-note');
     const foodPostponedWarning = document.getElementById('food-postponed-warning');
     const infoDate = document.getElementById('info-date');
 
-    if (btnToggle) {
-      btnToggle.addEventListener('click', () => {
-        if (statusAlert.classList.contains('hidden')) {
-          // --- 【順延案内モード】へ切り替え ---
-          statusNormal.classList.add('hidden');
-          statusAlert.classList.remove('hidden');
+    function applyPostponedMode(isPostponed) {
+      if (isPostponed) {
+        // --- 【順延案内モード】 ---
+        statusNormal.classList.add('hidden');
+        statusAlert.classList.remove('hidden');
 
-          // バウンスアニメーションのリセット再生
-          statusAlert.classList.remove('bounce-5times');
-          void statusAlert.offsetWidth; // リフロー
-          statusAlert.classList.add('bounce-5times');
+        // バウンスアニメーションのリセット再生
+        statusAlert.classList.remove('bounce-5times');
+        void statusAlert.offsetWidth; // リフロー
+        statusAlert.classList.add('bounce-5times');
 
-          // タイムスケジュール（15:00）を順延モードに書き換え
-          sched1500Title.innerText = "地元有志の出店（屋台） 営業スタート";
-          sched1500Desc.innerText = "昇降口前駐車場にて、本校卒業生(OB)や地元有志の温かい屋台が並びます。";
-          sched1500PostponedNote.classList.remove('hidden');
+        // 各種スケジュール表示の順延対応
+        sched1500Title.innerText = "地元有志の出店（屋台） 営業スタート";
+        sched1500Desc.innerText = "昇降口前駐車場にて、本校卒業生(OB)や地元有志の温かい屋台が並びます。";
+        sched1500PostponedNote.classList.remove('hidden');
 
-          // フードエリア注意書きのビジュアル強化（目立つ警告枠に変更）
-          foodPostponedWarning.classList.remove('bg-slate-900/60', 'border-slate-800', 'text-slate-300');
-          foodPostponedWarning.classList.add('bg-red-950/75', 'border-red-500/50', 'text-red-200', 'ring-2', 'ring-red-500/20');
+        // 出店エリア注意表記を目立たせる
+        foodPostponedWarning.classList.remove('bg-slate-900/60', 'border-slate-800', 'text-slate-300');
+        foodPostponedWarning.classList.add('bg-red-950/75', 'border-red-500/50', 'text-red-200', 'ring-2', 'ring-red-500/20');
 
-          // 開催概要のメイン日付表記を翌日に更新
-          infoDate.innerHTML = '2026年 8月30日（日） <span class="text-xs bg-red-600 text-white px-2 py-0.5 rounded ml-2 font-normal animate-pulse">順延開催</span>';
+        // 開催概要のメイン日付を日曜日に書き換え
+        infoDate.innerHTML = '2026年 8月30日（日） <span class="text-xs bg-red-600 text-white px-2 py-0.5 rounded ml-2 font-normal animate-pulse">順延開催</span>';
 
+        if (btnToggle) {
           btnToggle.innerText = "通常表示へ戻す";
           btnToggle.classList.remove('bg-orange-600');
           btnToggle.classList.add('bg-green-600');
-        } else {
-          // --- 【通常モード】へ戻す ---
-          statusNormal.classList.remove('hidden');
-          statusAlert.classList.add('hidden');
+        }
+      } else {
+        // --- 【通常モード】 ---
+        statusNormal.classList.remove('hidden');
+        statusAlert.classList.add('hidden');
 
-          // タイムスケジュール（15:00）を元に戻す
-          sched1500Title.innerText = "キッチンカー・出店 営業スタート";
-          sched1500Desc.innerText = "昇降口前駐車場にて、地域のキッチンカーや卒業生(OB)の屋台が並びます！";
-          sched1500PostponedNote.classList.add('hidden');
+        sched1500Title.innerText = "キッチンカー・出店 営業スタート";
+        sched1500Desc.innerText = "昇降口前駐車場にて、地域のキッチンカーや卒業生(OB)の屋台が並びます！";
+        sched1500PostponedNote.classList.add('hidden');
 
-          // フードエリア注意書きの通常ビジュアルへ戻す
-          foodPostponedWarning.classList.remove('bg-red-950/75', 'border-red-500/50', 'text-red-200', 'ring-2', 'ring-red-500/20');
-          foodPostponedWarning.classList.add('bg-slate-900/60', 'border-slate-800', 'text-slate-300');
+        foodPostponedWarning.classList.remove('bg-red-950/75', 'border-red-500/50', 'text-red-200', 'ring-2', 'ring-red-500/20');
+        foodPostponedWarning.classList.add('bg-slate-900/60', 'border-slate-800', 'text-slate-300');
 
-          // 開催概要の日付表記を元に戻す
-          infoDate.innerHTML = '2026年 8月29日（土）';
+        infoDate.innerHTML = '2026年 8月29日（土）';
 
+        if (btnToggle) {
           btnToggle.innerText = "順延バナー切替";
           btnToggle.classList.remove('bg-green-600');
           btnToggle.classList.add('bg-orange-600');
         }
+      }
+    }
+
+    // ----------------------------------------------------
+    // 初期起動時の登録
+    // ----------------------------------------------------
+    window.onload = function() {
+      checkDebugMode();
+      createStars();
+      
+      // 初回ランタン出現
+      for (let i = 0; i < 6; i++) {
+        spawnLantern();
+      }
+      setInterval(spawnLantern, 4000);
+
+      // 本番用の強制順延フラグ（FORCE_POSTPONED）が true の場合、最初から順延モードにする
+      if (FORCE_POSTPONED) {
+        applyPostponedMode(true);
+        currentModeIsPostponed = true;
+      }
+    };
+
+    // ----------------------------------------------------
+    // デバッグスイッチの動作処理
+    // ----------------------------------------------------
+    let currentModeIsPostponed = FORCE_POSTPONED;
+
+    if (btnToggle) {
+      btnToggle.addEventListener('click', () => {
+        currentModeIsPostponed = !currentModeIsPostponed;
+        applyPostponedMode(currentModeIsPostponed);
       });
     }
 
