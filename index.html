@@ -258,7 +258,7 @@
         <div>
           <h3 class="text-xs text-slate-400 font-bold">入場料・ランタン協賛</h3>
           <p class="text-base font-bold mt-0.5 text-white">入場・観覧自由（無料）</p>
-          <p class="text-xs text-slate-400 mt-1">当日販売ランタン：限定100基 @5,000円（16:00受付開始）</p>
+          <p class="text-xs text-slate-400 mt-1">当日販売ランタン：限定100基 @4,000円（16:00受付開始）</p>
         </div>
       </div>
     </section>
@@ -346,7 +346,7 @@
       <!-- 準備中プレースホルダー -->
       <div class="bg-slate-950/60 rounded-xl p-4 text-center border border-slate-800">
         <svg class="w-8 h-8 text-orange-400/50 mx-auto mb-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
-        <p class="text-xs text-orange-300 font-bold">出店ラインナップは7月中旬公開予定！</p>
+        <p class="text-xs text-orange-300 font-bold">出店ラインナップは7月下旬公開予定！</p>
         <p class="text-[10px] text-slate-400 mt-0.5">どんな美味しいお店が来るか、どうぞお楽しみに！</p>
       </div>
     </section>
@@ -526,7 +526,7 @@
       lantern.style.animationDuration = duration + 's';
 
       // 独自の揺らぎをCSS変数へ
-      const drift = (Math.random() * 100 - 50) + 'px';
+      const drift = (Math.random() * 1000 - 500) + 'px';
       const rotation = (Math.random() * 20 - 10) + 'deg';
       lantern.style.setProperty('--drift', drift);
       lantern.style.setProperty('--rotation', rotation);
@@ -612,7 +612,7 @@
       for (let i = 0; i < 6; i++) {
         spawnLantern();
       }
-      setInterval(spawnLantern, 4000);
+      setInterval(spawnLantern, 2000);
 
       // 本番用の強制順延フラグ（FORCE_POSTPONED）が true の場合、最初から順延モードにする
       if (FORCE_POSTPONED) {
