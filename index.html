@@ -154,7 +154,7 @@
     }
   </style>
 </head>
-<body class="relative min-h-screen pb-20">
+<body class="relative min-h-screen">
 
   <!-- 背景演出レイヤー -->
   <div class="star-bg" id="star-bg"></div>
@@ -177,7 +177,7 @@
           <span>【重要】天候不良にともなう順延のお知らせ</span>
         </div>
         <p class="text-xs text-red-50 leading-relaxed pl-7">
-          本日8/29(土)の開催は、雨天・強風が予想されるため、<strong class="font-bold underline text-yellow-300">明日8月30日（日）に順延</strong>となりました。タイムスケジュール等の時間変更はございませんが、<strong class="font-bold text-yellow-200">順延に伴いキッチンカーの出店は中止</strong>となります（地元の卒業生・有志による出店や屋台は予定通り営業いたします）。お気をつけてお越しください。
+          8/29(土)の開催は、雨天・強風が予想されるため、<strong class="font-bold underline text-yellow-300">8月30日（日）に順延</strong>となりました。タイムスケジュール等の時間変更や、<strong class="font-bold text-yellow-200">キッチンカーの出店に変更が出る場合</strong>がございます。お気をつけてお越しください。
         </p>
       </div>
     </div>
@@ -187,6 +187,7 @@
       <div class="inline-block bg-orange-500/20 text-orange-300 text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full border border-orange-500/30 mb-2">
         創立80周年記念イベント
       </div>
+      <img src="80logo.png" alt="創立80周年記念ロゴ" class="w-20 h-20 object-contain mb-1">
       <h1 class="text-2xl font-black tracking-tight leading-snug">
         さいたま市立大宮東中学校<br>
         <span class="text-3xl text-orange-400 glow-text font-serif">スカイランタン<br>フェスティバル</span>
@@ -229,7 +230,7 @@
         <div>
           <h3 class="text-xs text-slate-400 font-bold">開催日時</h3>
           <p id="info-date" class="text-base font-bold mt-0.5 text-white">2026年 8月29日（土）</p>
-          <p class="text-sm text-slate-300">17:30 〜 20:00（15:00開場）</p>
+          <p class="text-sm text-slate-300">17:00 〜 19:30（15:00開場）</p>
           <span class="inline-block bg-orange-950/50 text-orange-300 text-[10px] px-2 py-0.5 rounded border border-orange-500/20 mt-1">荒天時は翌 30日(日)に順延</span>
         </div>
       </div>
@@ -277,11 +278,11 @@
         <div class="relative">
           <span class="absolute -left-[27px] top-1 w-3 h-3 rounded-full bg-orange-500 ring-4 ring-slate-900"></span>
           <span class="text-xs font-bold text-orange-400">15:00 〜</span>
-          <h4 id="sched-1500-title" class="text-sm font-bold text-white transition-colors duration-300">キッチンカー・出店 営業スタート</h4>
-          <p id="sched-1500-desc" class="text-xs text-slate-400 mt-0.5 transition-colors duration-300">昇降口前駐車場にて、地域のキッチンカーや卒業生(OB)の屋台が並びます！</p>
+          <h4 id="sched-1500-title" class="text-sm font-bold text-white transition-colors duration-300">キッチンカー &amp; OB屋台（大阪屋） 営業スタート！</h4>
+          <p id="sched-1500-desc" class="text-xs text-slate-400 mt-0.5 transition-colors duration-300">昇降口前駐車場にて、地域のキッチンカーや卒業生(OB)の屋台が並びます！　※アトラクション前の15:00〜17:00が空いていてオススメです。</p>
           <!-- 順延時のみ表示される警告 -->
           <p id="sched-1500-postponed-note" class="hidden text-[11px] text-red-300 font-semibold mt-1 bg-red-950/40 p-2 rounded-lg border border-red-500/20">
-            ※順延に伴いキッチンカーの営業は中止となりました。地元の卒業生(OB)有志の屋台は予定通り営業いたします。
+            ※順延に伴い、キッチンカーの出店内容に変更が出る場合がございます。
           </p>
         </div>
 
@@ -289,8 +290,8 @@
         <div class="relative">
           <span class="absolute -left-[27px] top-1 w-3 h-3 rounded-full bg-orange-400 ring-4 ring-slate-900"></span>
           <span class="text-xs font-bold text-orange-400">16:00 〜</span>
-          <h4 class="text-sm font-bold text-white">一般当日参加 受付開始</h4>
-          <p class="text-xs text-slate-400 mt-0.5">当日販売ランタン（100基限定）の受付・絵付けがスタートします。</p>
+          <h4 class="text-sm font-bold text-white">在校生ランタン引渡し ＆ 一般受付スタート</h4>
+          <p class="text-xs text-slate-400 mt-0.5">在校生へのランタン引渡し（〜17:00）と、当日販売ランタン（限定100基）の受付・絵付けがスタートします。</p>
         </div>
 
         <!-- 17:00 -->
@@ -298,8 +299,30 @@
           <span class="absolute -left-[27px] top-1 w-3 h-3 rounded-full bg-orange-400 ring-4 ring-slate-900"></span>
           <span class="text-xs font-bold text-orange-400">17:00 〜 17:40</span>
           <h4 class="text-sm font-bold text-white">アトラクション・パフォーマンス（体育館）</h4>
-          <p class="text-xs text-orange-300 mt-1 font-bold">★ 随時情報更新！</p>
-          <p class="text-xs text-slate-400">在校生有志によるアトラクションや、OBによる特別ステージを予定しています。出演ラインナップは決定次第こちらで発表します！</p>
+          <p class="text-xs text-slate-400 mt-1">東中生・OB・地域の皆様による豪華ステージ！</p>
+          <ul class="text-xs text-slate-300 mt-1.5 flex flex-col gap-0.5 list-disc list-inside">
+            <li>NeonLyric（1年生バンド）</li>
+            <li>東中トリビアクイズ</li>
+            <li>八光流柔術（護身術教室・演武）</li>
+            <li>Buzz-LightBaller（フリースタイルバスケ）</li>
+            <li>Ⅱgnis（3年生ダンス）</li>
+          </ul>
+        </div>
+
+        <!-- 17:40 -->
+        <div class="relative">
+          <span class="absolute -left-[27px] top-1 w-3 h-3 rounded-full bg-orange-400 ring-4 ring-slate-900"></span>
+          <span class="text-xs font-bold text-orange-400">17:40 〜</span>
+          <h4 class="text-sm font-bold text-white">アトラクション終了 → 校庭へ移動</h4>
+          <p class="text-xs text-slate-400 mt-0.5">校庭にて、飲食や歓談をゆっくりお楽しみいただく時間です。</p>
+        </div>
+
+        <!-- 18:00 -->
+        <div class="relative">
+          <span class="absolute -left-[27px] top-1 w-3 h-3 rounded-full bg-orange-400 ring-4 ring-slate-900"></span>
+          <span class="text-xs font-bold text-orange-400">18:00 〜</span>
+          <h4 class="text-sm font-bold text-white">カルーア啓子（お笑いバルーンショー）</h4>
+          <p class="text-xs text-slate-400 mt-0.5">校庭にて、笑いあふれるバルーンパフォーマンスをお届けします。</p>
         </div>
 
         <!-- 18:40 -->
@@ -318,11 +341,11 @@
           <p class="text-xs text-slate-300 mt-0.5 font-semibold">校庭いっぱいに、願いをのせた光の群れが美しく舞い上がります。</p>
         </div>
 
-        <!-- 20:00 -->
+        <!-- 19:30 -->
         <div class="relative">
           <span class="absolute -left-[27px] top-1 w-3 h-3 rounded-full bg-slate-600 ring-4 ring-slate-900"></span>
-          <span class="text-xs font-bold text-slate-400">20:00</span>
-          <h4 class="text-sm font-bold text-slate-400">イベント終了・後片付け</h4>
+          <span class="text-xs font-bold text-slate-400">19:30</span>
+          <h4 class="text-sm font-bold text-slate-400">イベント終了</h4>
         </div>
       </div>
     </section>
@@ -334,24 +357,116 @@
         <h2 class="text-base font-bold text-white">出店・フードエリア情報</h2>
       </div>
       <p id="food-main-desc" class="text-xs text-slate-300 leading-relaxed transition-all duration-300">
-        現在、東中の卒業生（OB）の皆様、地域ゆかりのキッチンカーの出店交渉を進めております。やきそば、からあげ、各種ドリンクなど、お祭り気分を楽しめるメニューが盛りだくさん！
+        地域のキッチンカーや東中卒業生（OB）の屋台、計7店舗の出店が決定しました！やきそば、から揚げ、かき氷、クレープなど、お祭り気分を楽しめるメニューが勢ぞろいです。
       </p>
+
+      <!-- 出店店舗一覧 -->
+      <div class="bg-slate-950/60 rounded-xl p-4 border border-slate-800">
+        <div class="flex items-baseline justify-between mb-2">
+          <h3 class="text-xs font-bold text-orange-300">出店店舗一覧</h3>
+          <span class="text-[10px] text-slate-500">※変更になる場合がございます</span>
+        </div>
+        <ul class="flex flex-col gap-2 text-xs text-slate-300">
+          <li><span class="font-bold text-white">① Yourphoria</span> — やきそば</li>
+          <li><span class="font-bold text-white">② LILkitchen</span> — トルティーロール・かき氷</li>
+          <li><span class="font-bold text-white">③ キャラントカフェ</span> — クレープ・みかん</li>
+          <li><span class="font-bold text-white">④ フリルフスリフ</span> — ポテト</li>
+          <li><span class="font-bold text-white">⑤ いもーれ</span> — 唐揚げ他</li>
+          <li><span class="font-bold text-white">⑥ あがーにゃ</span> — 肉串・かき氷</li>
+          <li class="flex flex-col gap-0.5">
+            <span class="font-bold text-white">⑦ もつやき大阪屋</span>
+            <span class="text-slate-400">つくね・フランクフルト・ブルーシールアイスクリーム・ノンアルオリオン・ノンアルレモン・トロピカルドリンク、ラムネ</span>
+          </li>
+        </ul>
+      </div>
 
       <!-- 順延・変更に伴うキッチンカー・出店ルール（常に注記として表示し、順延モードでより強調） -->
       <div id="food-postponed-warning" class="p-3 bg-slate-900/60 border border-slate-800 rounded-xl text-xs text-slate-300 leading-normal transition-all duration-300">
         <span class="font-bold text-orange-400">⚠️ 順延時の出店に関する重要なお知らせ：</span><br>
-        天候不良等によりイベントが<strong class="text-orange-300">日曜日に順延となった場合、キッチンカーの営業は中止</strong>となります。ただし、<strong class="text-green-300">地元の卒業生（OB）有志による出店・屋台は予定通り営業</strong>いたします。
+        天候不良等によりイベントが<strong class="text-orange-300">日曜日に順延となった場合、キッチンカーの出店に変更が出る場合</strong>がございます。
       </div>
-      
-      <!-- 準備中プレースホルダー -->
-      <div class="bg-slate-950/60 rounded-xl p-4 text-center border border-slate-800">
-        <svg class="w-8 h-8 text-orange-400/50 mx-auto mb-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
-        <p class="text-xs text-orange-300 font-bold">出店ラインナップは7月下旬公開予定！</p>
-        <p class="text-[10px] text-slate-400 mt-0.5">どんな美味しいお店が来るか、どうぞお楽しみに！</p>
+
+      <!-- ご来場の皆様へのお願い（フード・会場マナー） -->
+      <div class="p-3 bg-slate-900/40 border border-slate-800 rounded-xl text-xs text-slate-300 leading-normal">
+        <span class="font-bold text-amber-300">ご来場の皆様へのお願い：</span>
+        <ul class="mt-1 flex flex-col gap-1">
+          <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>体育館内は飲食禁止です。水分補給の飲料のみOKとなります。</span></li>
+          <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>ゴミは分別し、会場内のゴミ箱へお捨ていただくか、お持ち帰りにご協力ください。</span></li>
+        </ul>
       </div>
     </section>
 
-    <!-- 7. 【安全への配慮】 -->
+    <!-- 7. 【パフォーマー紹介】 -->
+    <section class="glass-panel rounded-2xl p-5 shadow-lg flex flex-col gap-4">
+      <div class="flex items-center gap-2">
+        <span class="w-1.5 h-4 bg-orange-500 rounded"></span>
+        <h2 class="text-base font-bold text-white">パフォーマー紹介</h2>
+      </div>
+      <p class="text-xs text-slate-400 -mt-2">17:00〜 東中アトラクションステージ（体育館）に出演！</p>
+
+      <div class="flex flex-col gap-3">
+        <!-- NeonLyric -->
+        <div class="bg-slate-900/50 p-3.5 rounded-xl border border-slate-800">
+          <div class="flex items-start justify-between gap-3">
+            <div class="min-w-0 flex-1 flex items-baseline gap-2 flex-wrap">
+              <span class="text-[10px] font-bold text-orange-400 bg-orange-950/50 px-2 py-0.5 rounded">1年生バンドチーム</span>
+              <h3 class="text-sm font-bold text-white">NeonLyric（ネオンリリック）</h3>
+            </div>
+            <img src="NeonLyric.jpg" alt="NeonLyric ロゴ" class="w-16 h-auto rounded-lg border border-slate-700 shrink-0">
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1.5">メンバー：6人</p>
+          <p class="text-xs text-slate-300 mt-1 leading-relaxed">とにかく演奏聴いてください！一緒に盛り上がってください！</p>
+          <p class="text-[11px] text-slate-500 mt-1.5 leading-relaxed">大宮小の「ミニライブ」文化への出場をきっかけに結成。楽しみながらメンバーを増やし、現在に至る6人組バンド。</p>
+        </div>
+
+        <!-- 八光流柔術（別PDFあり） -->
+        <div class="bg-slate-900/50 p-3.5 rounded-xl border border-slate-800 flex items-center justify-between gap-3">
+          <div>
+            <span class="text-[10px] font-bold text-orange-400 bg-orange-950/50 px-2 py-0.5 rounded">護身術教室・演武</span>
+            <h3 class="text-sm font-bold text-white mt-1">八光流柔術</h3>
+          </div>
+          <a href="八光流柔術の紹介.pdf" target="_blank" rel="noopener noreferrer" class="shrink-0 text-[11px] font-bold text-orange-300 border border-orange-500/30 rounded-lg px-3 py-1.5 hover:bg-orange-500/10 transition-colors">
+            紹介PDFを見る
+          </a>
+        </div>
+
+        <!-- Buzz-LightBaller -->
+        <div class="bg-slate-900/50 p-3.5 rounded-xl border border-slate-800">
+          <div class="flex items-baseline gap-2 flex-wrap">
+            <span class="text-[10px] font-bold text-orange-400 bg-orange-950/50 px-2 py-0.5 rounded">フリースタイルバスケ</span>
+            <h3 class="text-sm font-bold text-white">Buzz-LightBaller（バズライトボーラー）</h3>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1.5">母校の80周年に駆けつけた、フリースタイルバスケの先輩たち</p>
+          <p class="text-xs text-slate-300 mt-1 leading-relaxed">大宮区を拠点に活動する日本のプロ・フリースタイルバスケットボールチーム。さいたま観光大使も務め、国内外のイベントやSNSで高い人気を誇る実力派パフォーマー。音楽に合わせたダイナミックなダンスや、アクロバティックなボールハンドリングは必見です！</p>
+        </div>
+
+        <!-- Ⅱgnis -->
+        <div class="bg-slate-900/50 p-3.5 rounded-xl border border-slate-800">
+          <div class="flex items-start justify-between gap-3">
+            <div class="min-w-0 flex-1 flex items-baseline gap-2 flex-wrap">
+              <span class="text-[10px] font-bold text-orange-400 bg-orange-950/50 px-2 py-0.5 rounded">3年生ダンスチーム</span>
+              <h3 class="text-sm font-bold text-white">Ⅱgnis（イグニス）</h3>
+            </div>
+            <img src="IIgnis.jpg" alt="Ⅱgnis ロゴ" class="w-16 h-auto rounded-lg border border-slate-700 shrink-0">
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1.5">メンバー：7人</p>
+          <p class="text-xs text-slate-300 mt-1 leading-relaxed">踊り方もジャンルも違う7人のメンバーが魅せる最高のステージをご覧ください！ラテン語で「情熱の火」を意味するチーム名は、ランタンの暖かい光にちなんでいます。</p>
+        </div>
+
+        <!-- カルーア啓子（別PDFあり） -->
+        <div class="bg-slate-900/50 p-3.5 rounded-xl border border-slate-800 flex items-center justify-between gap-3">
+          <div>
+            <span class="text-[10px] font-bold text-orange-400 bg-orange-950/50 px-2 py-0.5 rounded">18:00〜 校庭</span>
+            <h3 class="text-sm font-bold text-white mt-1">カルーア啓子（お笑いバルーンショー）</h3>
+          </div>
+          <a href="カルーア啓子プロフィール.pdf" target="_blank" rel="noopener noreferrer" class="shrink-0 text-[11px] font-bold text-orange-300 border border-orange-500/30 rounded-lg px-3 py-1.5 hover:bg-orange-500/10 transition-colors">
+            プロフィールを見る
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. 【安全への配慮】 -->
     <section class="glass-panel rounded-2xl p-5 shadow-lg border-emerald-500/10">
       <div class="flex items-center gap-2 mb-3">
         <span class="w-1.5 h-4 bg-emerald-500 rounded"></span>
@@ -386,27 +501,28 @@
       </div>
     </section>
 
-    <!-- 8. 【ご来場にあたってのお願い】 -->
+    <!-- 9. 【ご来場にあたってのお願い】 -->
     <section class="glass-panel rounded-2xl p-5 shadow-lg text-xs leading-relaxed flex flex-col gap-2 text-slate-300">
       <div class="flex items-center gap-2 mb-1">
         <span class="w-1.5 h-4 bg-amber-500 rounded"></span>
         <h2 class="text-base font-bold text-white">来場時のお願い</h2>
       </div>
-      <ul class="list-disc list-inside flex flex-col gap-1.5">
-        <li>校内への車・バイクの乗り入れは原則お断りしております。</li>
-        <li>自転車でお越しの場合は「西門」からお入りいただき、「給食室裏」の特設駐輪場をご利用ください。</li>
-        <li>校庭に座ってゆっくり鑑賞いただくため、レジャーシートのご持参をおすすめします。</li>
-        <li>夏の宵の口はまだ気温が高い場合があります。各自熱中症対策（水筒・帽子など）をお願いします。</li>
+      <ul class="flex flex-col gap-1.5">
+        <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>校内への車・バイクの乗り入れはお断りしております。</span></li>
+        <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>自転車でお越しの場合は「西門」からお入りいただき、「給食室裏」の特設駐輪場をご利用ください。</span></li>
+        <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>校庭に座ってゆっくり鑑賞いただくため、レジャーシートのご持参をおすすめします。</span></li>
+        <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>夏の宵の口はまだ気温が高い場合があります。各自熱中症対策（水筒・帽子など）をお願いします。</span></li>
       </ul>
     </section>
 
     <!-- フッター -->
     <footer class="text-center py-8 text-[11px] text-slate-500 flex flex-col gap-1">
-     <p><img src="./basic_wide.png" alt="日本ランタン協会" class="w-2/3 mx-auto block"></p>
+     <p class="mt-2 text-base font-bold">主催<br>さいたま市立大宮東中学校<br>創立80周年記念事業実行委員会</p>
+     <p class="mt-2 text-[10px] font-bold whitespace-nowrap">協賛<br>（株）サイサン<br>コカ・コーラ ボトラーズジャパンベンディング（株）大宮支店<br>（株）丸昌エンターテイメント</p>
+     <p class="mt-2"><img src="./basic_wide.png" alt="日本ランタン協会" class="w-2/3 mx-auto block"></p>
      <p class="text-justify underline">
       <a href="https://www.skylanternassociation.com/" target="_blank" rel="noopener noreferrer">当委員会のスカイランタンフェスティバルにおいて、協賛・協力を頂いた日本スカイランタン協会&reg;様より、文化や教育の促進を目的とした支援としてスカイランタンの一部を寄贈いただきました。深く感謝申し上げます。</a>
      </p>
-     <p class="mt-2 text-base font-bold">主催<br>さいたま市立大宮東中学校<br>創立80周年記念事業実行委員会</p>
      <p>&copy; 2026 Omiya Higashi Junior High School 80th Anniversary Committee.</p>
     </footer>
 
@@ -427,6 +543,13 @@
     // ----------------------------------------------------
     const FORCE_POSTPONED = false; // ★ 実際に順延させる場合はここを true に書き換えてください
 
+    // 順延モードかどうかを保持するフラグ（カウントダウンや告知表示の切り替えで共通利用）
+    let currentModeIsPostponed = FORCE_POSTPONED;
+
+    // カウントダウンの目標日時（通常開催日／順延時の翌日開催、それぞれのランタンリリース時刻）
+    const TARGET_NORMAL_DATE = new Date('2026-08-29T19:00:00+09:00');
+    const TARGET_POSTPONED_DATE = new Date('2026-08-30T19:00:00+09:00');
+
     // ----------------------------------------------------
     // 0. URLパラメータをチェックしてテスト用スイッチを表示する
     // ----------------------------------------------------
@@ -445,8 +568,8 @@
     // 1. カウントダウンタイマー処理
     // ----------------------------------------------------
     function updateCountdown() {
-      // ターゲット日付：2026年8月29日 19:00 JST (イベント開始)
-      const targetDate = new Date('2026-08-29T19:00:00+09:00');
+      // 順延モードなら翌日（8/30）19:00 JST、通常なら8/29 19:00 JSTを目標にする
+      const targetDate = currentModeIsPostponed ? TARGET_POSTPONED_DATE : TARGET_NORMAL_DATE;
       const now = new Date();
       const difference = targetDate - now;
 
@@ -566,9 +689,9 @@
         void statusAlert.offsetWidth; // リフロー
         statusAlert.classList.add('bounce-5times');
 
-        // 各種スケジュール表示の順延対応
-        sched1500Title.innerText = "地元有志の出店（屋台） 営業スタート";
-        sched1500Desc.innerText = "昇降口前駐車場にて、本校卒業生(OB)や地元有志の温かい屋台が並びます。";
+        // 各種スケジュール表示の順延対応（出店内容は変更の可能性ありとして注記のみ表示）
+        sched1500Title.innerText = "キッチンカー & OB屋台（大阪屋） 営業スタート！";
+        sched1500Desc.innerText = "昇降口前駐車場にて、地域のキッチンカーや卒業生(OB)の屋台が並びます！　※アトラクション前の15:00〜17:00が空いていてオススメです。";
         sched1500PostponedNote.classList.remove('hidden');
 
         // 出店エリア注意表記を目立たせる
@@ -588,8 +711,8 @@
         statusNormal.classList.remove('hidden');
         statusAlert.classList.add('hidden');
 
-        sched1500Title.innerText = "キッチンカー・出店 営業スタート";
-        sched1500Desc.innerText = "昇降口前駐車場にて、地域のキッチンカーや卒業生(OB)の屋台が並びます！";
+        sched1500Title.innerText = "キッチンカー & OB屋台（大阪屋） 営業スタート！";
+        sched1500Desc.innerText = "昇降口前駐車場にて、地域のキッチンカーや卒業生(OB)の屋台が並びます！　※アトラクション前の15:00〜17:00が空いていてオススメです。";
         sched1500PostponedNote.classList.add('hidden');
 
         foodPostponedWarning.classList.remove('bg-red-950/75', 'border-red-500/50', 'text-red-200', 'ring-2', 'ring-red-500/20');
@@ -603,6 +726,9 @@
           btnToggle.classList.add('bg-orange-600');
         }
       }
+
+      // カウントダウンの目標日時をモード切り替えに合わせて即時反映
+      updateCountdown();
     }
 
     // ----------------------------------------------------
@@ -620,16 +746,14 @@
 
       // 本番用の強制順延フラグ（FORCE_POSTPONED）が true の場合、最初から順延モードにする
       if (FORCE_POSTPONED) {
-        applyPostponedMode(true);
         currentModeIsPostponed = true;
+        applyPostponedMode(true);
       }
     };
 
     // ----------------------------------------------------
     // デバッグスイッチの動作処理
     // ----------------------------------------------------
-    let currentModeIsPostponed = FORCE_POSTPONED;
-
     if (btnToggle) {
       btnToggle.addEventListener('click', () => {
         currentModeIsPostponed = !currentModeIsPostponed;
