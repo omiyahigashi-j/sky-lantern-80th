@@ -166,9 +166,9 @@
     <!-- 1. 【最上部】緊急告知・リアルタイム案内エリア -->
     <div id="status-area" class="transition-all duration-500 ease-in-out">
       <!-- 通常時のメッセージ -->
-      <div id="status-normal" class="glass-panel text-orange-200 text-xs py-2.5 px-4 rounded-full flex items-center justify-center gap-2 border border-orange-500/20">
-        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-        <span>現在、予定通り開催に向けて準備を進めております。</span>
+      <div id="status-normal" class="glass-panel text-orange-200 text-xs py-2.5 px-4 rounded-2xl flex items-start gap-2 border border-orange-500/20">
+        <span class="w-2 h-2 mt-1 rounded-full bg-green-400 animate-pulse shrink-0"></span>
+        <span>現在、予定通り開催に向けて準備を進めております。天候による順延の場合は、前日28日（金）の夕方までにこちらで告知します。</span>
       </div>
       <!-- 天候不良等による順延・変更時のメッセージ（初期状態は非表示、適用時に5回バウンドする） -->
       <div id="status-alert" class="hidden glass-panel-alert text-white text-sm py-3.5 px-4 rounded-xl flex flex-col gap-1 shadow-lg bounce-5times">
@@ -264,7 +264,37 @@
       </div>
     </section>
 
-    <!-- 5. 【タイムスケジュール】 -->
+    <!-- 5. 【会場マップ・アクセス案内】 -->
+    <section class="glass-panel rounded-2xl p-5 shadow-lg flex flex-col gap-3">
+      <div class="flex items-center gap-2">
+        <span class="w-1.5 h-4 bg-orange-500 rounded"></span>
+        <h2 class="text-base font-bold text-white">会場マップ・アクセス案内</h2>
+      </div>
+      <p class="text-xs text-slate-300 leading-relaxed">
+        西門・正門からの入り方、駐輪場やキッチンカーエリア、ランタンのリリースエリアなど、当日の会場内の様子です。タップで拡大してご確認いただけます。
+      </p>
+      <a href="会場図.jpg" target="_blank" rel="noopener noreferrer" class="block rounded-xl overflow-hidden border border-slate-800">
+        <img src="会場図.jpg" alt="会場マップ：西門から駐輪場への経路、正門からの入場経路、キッチンカーエリア、受付、体育館への導線、屋外トイレ、ランタンリリースエリア、東門閉鎖の案内" class="w-full h-auto block">
+      </a>
+      <p class="text-[11px] text-slate-500">※東門は閉鎖されています。ご入場は正門（徒歩のみ）または西門（自転車の方）をご利用ください。</p>
+    </section>
+
+    <!-- 6. 【ご来場にあたってのお願い】 -->
+    <section class="glass-panel rounded-2xl p-5 shadow-lg text-xs leading-relaxed flex flex-col gap-2 text-slate-300">
+      <div class="flex items-center gap-2 mb-1">
+        <span class="w-1.5 h-4 bg-amber-500 rounded"></span>
+        <h2 class="text-base font-bold text-white">来場時のお願い</h2>
+      </div>
+      <ul class="flex flex-col gap-1.5">
+        <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>校内への車・バイクの乗り入れはお断りしております。</span></li>
+        <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>自転車でお越しの場合は「西門」からお入りいただき、「給食室裏」の特設駐輪場をご利用ください。</span></li>
+        <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>校庭に座ってゆっくり鑑賞いただくため、レジャーシートのご持参をおすすめします。</span></li>
+        <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>夏の宵の口はまだ気温が高い場合があります。各自熱中症対策（水筒・帽子など）をお願いします。</span></li>
+        <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>体育館にご来場の方は、ご自身の靴を入れる袋をお持ちください。</span></li>
+      </ul>
+    </section>
+
+    <!-- 7. 【タイムスケジュール】 -->
     <section class="glass-panel rounded-2xl p-5 shadow-lg">
       <div class="flex items-center gap-2 mb-4">
         <span class="w-1.5 h-4 bg-orange-500 rounded"></span>
@@ -307,6 +337,9 @@
             <li>Buzz-LightBaller（フリースタイルバスケ）</li>
             <li>Ⅱgnis（3年生ダンス）</li>
           </ul>
+          <p class="text-[11px] text-slate-500 mt-1.5">
+            ※順延の場合、アトラクション・パフォーマンスは中止となります（パフォーマンスはございません）。
+          </p>
         </div>
 
         <!-- 17:40 -->
@@ -350,7 +383,7 @@
       </div>
     </section>
 
-    <!-- 6. 【キッチンカー・出店案内】 -->
+    <!-- 8. 【キッチンカー・出店案内】 -->
     <section class="glass-panel rounded-2xl p-5 shadow-lg flex flex-col gap-3">
       <div class="flex items-center gap-2">
         <span class="w-1.5 h-4 bg-orange-500 rounded"></span>
@@ -396,13 +429,16 @@
       </div>
     </section>
 
-    <!-- 7. 【パフォーマー紹介】 -->
+    <!-- 9. 【パフォーマー紹介】 -->
     <section class="glass-panel rounded-2xl p-5 shadow-lg flex flex-col gap-4">
       <div class="flex items-center gap-2">
         <span class="w-1.5 h-4 bg-orange-500 rounded"></span>
         <h2 class="text-base font-bold text-white">パフォーマー紹介</h2>
       </div>
       <p class="text-xs text-slate-400 -mt-2">17:00〜 東中アトラクションステージ（体育館）に出演！</p>
+      <p id="performer-postponed-note" class="hidden text-[11px] text-red-300 font-semibold -mt-2 bg-red-950/40 p-2 rounded-lg border border-red-500/20">
+        ※順延の場合、アトラクション・パフォーマンスは中止となります（パフォーマンスはございません）。
+      </p>
 
       <div class="flex flex-col gap-3">
         <!-- NeonLyric -->
@@ -466,7 +502,7 @@
       </div>
     </section>
 
-    <!-- 8. 【安全への配慮】 -->
+    <!-- 10. 【安全への配慮】 -->
     <section class="glass-panel rounded-2xl p-5 shadow-lg border-emerald-500/10">
       <div class="flex items-center gap-2 mb-3">
         <span class="w-1.5 h-4 bg-emerald-500 rounded"></span>
@@ -499,20 +535,6 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <!-- 9. 【ご来場にあたってのお願い】 -->
-    <section class="glass-panel rounded-2xl p-5 shadow-lg text-xs leading-relaxed flex flex-col gap-2 text-slate-300">
-      <div class="flex items-center gap-2 mb-1">
-        <span class="w-1.5 h-4 bg-amber-500 rounded"></span>
-        <h2 class="text-base font-bold text-white">来場時のお願い</h2>
-      </div>
-      <ul class="flex flex-col gap-1.5">
-        <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>校内への車・バイクの乗り入れはお断りしております。</span></li>
-        <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>自転車でお越しの場合は「西門」からお入りいただき、「給食室裏」の特設駐輪場をご利用ください。</span></li>
-        <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>校庭に座ってゆっくり鑑賞いただくため、レジャーシートのご持参をおすすめします。</span></li>
-        <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>夏の宵の口はまだ気温が高い場合があります。各自熱中症対策（水筒・帽子など）をお願いします。</span></li>
-      </ul>
     </section>
 
     <!-- フッター -->
@@ -675,6 +697,7 @@
     const sched1500Title = document.getElementById('sched-1500-title');
     const sched1500Desc = document.getElementById('sched-1500-desc');
     const sched1500PostponedNote = document.getElementById('sched-1500-postponed-note');
+    const performerPostponedNote = document.getElementById('performer-postponed-note');
     const foodPostponedWarning = document.getElementById('food-postponed-warning');
     const infoDate = document.getElementById('info-date');
 
@@ -693,6 +716,7 @@
         sched1500Title.innerText = "キッチンカー & OB屋台（大阪屋） 営業スタート！";
         sched1500Desc.innerText = "昇降口前駐車場にて、地域のキッチンカーや卒業生(OB)の屋台が並びます！　※アトラクション前の15:00〜17:00が空いていてオススメです。";
         sched1500PostponedNote.classList.remove('hidden');
+        performerPostponedNote.classList.remove('hidden');
 
         // 出店エリア注意表記を目立たせる
         foodPostponedWarning.classList.remove('bg-slate-900/60', 'border-slate-800', 'text-slate-300');
@@ -714,6 +738,7 @@
         sched1500Title.innerText = "キッチンカー & OB屋台（大阪屋） 営業スタート！";
         sched1500Desc.innerText = "昇降口前駐車場にて、地域のキッチンカーや卒業生(OB)の屋台が並びます！　※アトラクション前の15:00〜17:00が空いていてオススメです。";
         sched1500PostponedNote.classList.add('hidden');
+        performerPostponedNote.classList.add('hidden');
 
         foodPostponedWarning.classList.remove('bg-red-950/75', 'border-red-500/50', 'text-red-200', 'ring-2', 'ring-red-500/20');
         foodPostponedWarning.classList.add('bg-slate-900/60', 'border-slate-800', 'text-slate-300');
