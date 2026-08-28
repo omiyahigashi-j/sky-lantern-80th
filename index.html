@@ -191,17 +191,6 @@
       </div>
     </div>
 
-    <!-- 1.5 【キッチンカー・飲食スペース拡充のお知らせ】 -->
-    <div class="glass-panel rounded-2xl p-4 flex flex-col gap-2 border border-orange-500/30">
-      <div class="flex items-center gap-2">
-        <span class="text-xl leading-none shrink-0" aria-hidden="true">🎪</span>
-        <span class="text-xs whitespace-nowrap font-black text-orange-300">雨でも大丈夫！屋外に飲食スペース拡充します！</span>
-      </div>
-      <p class="text-xs text-slate-300 leading-relaxed pl-7">
-        キッチンカーエリア付近に体育祭等で使用しているテントを増設し、雨に濡れにくい飲食スペースを拡充する予定です。キッチンカー・OB屋台のグルメを、ぜひごゆっくりお楽しみください。
-      </p>
-    </div>
-
     <!-- 2. 【メイン】ヘッダー＆イベントスローガン -->
     <header class="text-center pt-2 pb-6 flex flex-col items-center gap-2">
       <div class="inline-block bg-orange-500/20 text-orange-300 text-xs font-bold tracking-widest uppercase px-3 py-1 rounded-full border border-orange-500/30 mb-2">
@@ -432,10 +421,15 @@
         </ul>
       </div>
 
-      <!-- 順延・変更に伴うキッチンカー・出店ルール（常に注記として表示し、順延モードでより強調） -->
-      <div id="food-postponed-warning" class="p-3 bg-slate-900/60 border border-slate-800 rounded-xl text-xs text-slate-300 leading-normal transition-all duration-300">
-        <span class="font-bold text-orange-400">⚠️ 順延時の出店に関する重要なお知らせ：</span><br>
-        天候不良等によりイベントが<strong class="text-orange-300">日曜日に順延となった場合、キッチンカーの出店に変更が出る場合</strong>がございます。
+      <!-- 雨天決行に伴う飲食スペース拡充のお知らせ -->
+      <div class="glass-panel rounded-xl p-4 flex flex-col gap-2 bg-orange-500/10 border-2 border-orange-400/70 shadow-lg shadow-orange-500/20">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl leading-none shrink-0" aria-hidden="true">🎪</span>
+          <span class="text-xs whitespace-nowrap font-black text-orange-300 glow-text">雨でも大丈夫！屋外に飲食スペース拡充します！</span>
+        </div>
+        <p class="text-xs text-slate-200 leading-relaxed pl-8">
+          キッチンカーエリア付近に体育祭等で使用しているテントを増設し、雨に濡れにくい飲食スペースを拡充する予定です。キッチンカー・OB屋台のグルメを、ぜひごゆっくりお楽しみください。
+        </p>
       </div>
 
       <!-- ご来場の皆様へのお願い（フード・会場マナー） -->
@@ -718,7 +712,6 @@
     const sched1500Desc = document.getElementById('sched-1500-desc');
     const sched1500PostponedNote = document.getElementById('sched-1500-postponed-note');
     const performerPostponedNote = document.getElementById('performer-postponed-note');
-    const foodPostponedWarning = document.getElementById('food-postponed-warning');
     const infoDate = document.getElementById('info-date');
 
     function applyPostponedMode(isPostponed) {
@@ -738,10 +731,6 @@
         sched1500PostponedNote.classList.remove('hidden');
         performerPostponedNote.classList.remove('hidden');
 
-        // 出店エリア注意表記を目立たせる
-        foodPostponedWarning.classList.remove('bg-slate-900/60', 'border-slate-800', 'text-slate-300');
-        foodPostponedWarning.classList.add('bg-red-950/75', 'border-red-500/50', 'text-red-200', 'ring-2', 'ring-red-500/20');
-
         // 開催概要のメイン日付を日曜日に書き換え
         infoDate.innerHTML = '2026年 8月30日（日） <span class="text-xs bg-red-600 text-white px-2 py-0.5 rounded ml-2 font-normal animate-pulse">順延開催</span>';
 
@@ -759,9 +748,6 @@
         sched1500Desc.innerText = "昇降口前駐車場にて、地域のキッチンカーや卒業生(OB)の屋台が並びます！　※アトラクション前の15:00〜17:00が空いていてオススメです。";
         sched1500PostponedNote.classList.add('hidden');
         performerPostponedNote.classList.add('hidden');
-
-        foodPostponedWarning.classList.remove('bg-red-950/75', 'border-red-500/50', 'text-red-200', 'ring-2', 'ring-red-500/20');
-        foodPostponedWarning.classList.add('bg-slate-900/60', 'border-slate-800', 'text-slate-300');
 
         infoDate.innerHTML = '2026年 8月29日（土）';
 
