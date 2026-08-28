@@ -170,9 +170,14 @@
     <!-- 1. 【最上部】緊急告知・リアルタイム案内エリア -->
     <div id="status-area" class="transition-all duration-500 ease-in-out">
       <!-- 通常時のメッセージ -->
-      <div id="status-normal" class="glass-panel text-orange-200 text-xs py-2.5 px-4 rounded-2xl flex items-start gap-2 border border-orange-500/20">
-        <span class="w-2 h-2 mt-1 rounded-full bg-green-400 animate-pulse shrink-0"></span>
-        <span>現在、予定通り開催に向けて準備を進めております。天候による順延の場合は、前日28日（金）の夕方までにこちらで告知します。</span>
+      <div id="status-normal" class="glass-panel rounded-2xl p-4 flex flex-col gap-2 border-2 border-amber-400/60 shadow-lg shadow-amber-500/20">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-amber-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+          <span class="text-sm font-black text-amber-300 glow-text">明日29日（土）、予定通り開催決定！</span>
+        </div>
+        <p class="text-xs text-slate-200 leading-relaxed pl-7">
+          雨予報ですので、お足元お気をつけてご来場ください。なお当日、雨の具合により、ランタンセレモニー&amp;リリースを体育館で行う可能性がございます。体育館にご来場の際は、<strong class="font-bold underline text-amber-200">上履きとご自身の靴を入れる袋をお持ちください</strong>。またその他開催内容やスケジュールを変更させていただく場合がございますので、会場にてアナウンスさせていただきます。また、イベントスタッフ（ピンク色のビブスを着用）もおりますので、お困りの際はお声がけください。（8/28 17:00）
+        </p>
       </div>
       <!-- 天候不良等による順延・変更時のメッセージ（初期状態は非表示、適用時に5回バウンドする） -->
       <div id="status-alert" class="hidden glass-panel-alert text-white text-sm py-3.5 px-4 rounded-xl flex flex-col gap-1 shadow-lg bounce-5times">
@@ -292,9 +297,8 @@
       <ul class="flex flex-col gap-1.5">
         <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>校内への車・バイクの乗り入れ、また飲酒・喫煙はお断りしております。</span></li>
         <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>自転車でお越しの場合は「西門」からお入りいただき、「給食室裏」の特設駐輪場をご利用ください。</span></li>
-        <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>校庭に座ってゆっくり鑑賞いただくため、レジャーシートのご持参をおすすめします。</span></li>
         <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>夕方とはいえまだ気温が高い場合があります。各自熱中症対策（水筒・帽子など）をお願いします。</span></li>
-        <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>体育館にご来場の方は、ご自身の靴を入れる袋をお持ちください。</span></li>
+        <li class="flex gap-2"><span class="mt-1.5 w-1 h-1 rounded-full bg-slate-500 shrink-0"></span><span>体育館にご来場の方は、上履きとご自身の靴を入れる袋をお持ちください。</span></li>
       </ul>
     </section>
 
